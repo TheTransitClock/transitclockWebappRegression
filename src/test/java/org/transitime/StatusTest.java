@@ -1,7 +1,7 @@
 package org.transitime;
 /*-
  * #%L
- * transiTimeWebappRegression
+ * transitimeWebappRegression
  * %%
  * Copyright (C) 2017 Sean Óg Crudden
  * %%
@@ -43,7 +43,7 @@ public class StatusTest {
 	private String baseUrl = "http://127.0.0.1:8080/web";
 
 	/**
-	 * This checks the the systems is connected to the database.
+	 * This checks the system is connected to the database.
 	 */
 	@Test
 	public void databaseConnectivity() {

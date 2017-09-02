@@ -24,7 +24,10 @@ package org.transitime;
 
 import org.testng.annotations.Test;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -37,23 +40,23 @@ import org.testng.annotations.AfterTest;
 
 /**
  * @author Sean Óg Crudden
- * First go at using selenium to test transiTime web interface.
+ * Test the reports.
  * 
  * 
  * 
  *
  */
-public class MapsTest {
+public class ReportsTest {
 	private WebDriver driver;
 	private String baseUrl="http://127.0.0.1:8080/web";
 	
 	
 	/**
-	 * This goes to the maps page and looks at the "Map for Selected Route" page and checks if there is at least one route option avialable.
+	 * This looks at the last avl report screen and confirms vehicle report for today for at least one vehicle.
 	 * @throws InterruptedException
 	 */
 	@Test
-	public void routeOnMap() throws InterruptedException {
+	public void lastAVLReport() throws InterruptedException {
 		
 		
 		
@@ -61,19 +64,18 @@ public class MapsTest {
 		String title = driver.getTitle();
 		Assert.assertTrue(title.contains("Agencies"));
 		
-		driver.findElement(By.partialLinkText("Maps")).click();
-		driver.findElement(By.partialLinkText("Map for Selected Route")).click();
-						
-		WebElement selectElement = driver.findElement(By.id("routes"));
+		driver.findElement(By.partialLinkText("Reports")).click();
 		
-		Select select = new Select(selectElement);
+		driver.findElement(By.partialLinkText("Last GPS Report by Vehicle")).click();										
 		
-		select.toString();
+		driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
 		
-		List<WebElement> allOptions = select.getOptions();
+		//TODO make this be a wait for table to load
+		Thread.sleep(5000);
 		
-		Assert.assertTrue(allOptions.size()>1);
+		String date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
 		
+		Assert.assertTrue(driver.getPageSource().contains(date));
 	}
 
 	@BeforeTest
