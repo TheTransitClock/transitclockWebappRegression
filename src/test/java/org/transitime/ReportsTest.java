@@ -26,14 +26,11 @@ import org.testng.annotations.Test;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.AfterTest;
@@ -42,9 +39,6 @@ import org.testng.annotations.AfterTest;
  * @author Sean Óg Crudden
  * Test the reports.
  * 
- * 
- * 
- *
  */
 public class ReportsTest {
 	private WebDriver driver;
@@ -52,16 +46,16 @@ public class ReportsTest {
 	
 	
 	/**
-	 * This looks at the last avl report screen and confirms vehicle report for today for at least one vehicle.
+	 * This looks at the last avl report and confirms vehicle report for today for at least one vehicle.
 	 * @throws InterruptedException
 	 */
 	@Test
 	public void lastAVLReport() throws InterruptedException {
-		
-		
-		
+	
 		driver.get(baseUrl);
+		
 		String title = driver.getTitle();
+		
 		Assert.assertTrue(title.contains("Agencies"));
 		
 		driver.findElement(By.partialLinkText("Reports")).click();
