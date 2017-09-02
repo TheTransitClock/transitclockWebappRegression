@@ -8,4 +8,4 @@ To run the tests
 mvn -DargLine="-Dbaseurl=http://127.0.0.1:8080/web" install
 ```
 
-This will run the tests against a transiTime install at http://127.0.0.1:8080/web. You can change this to be any URL with transiTime installed to test it.
+This will run the tests against a transiTime install at http://127.0.0.1:8080/web. You can change this to be any URL where transiTime is installed to test it.
