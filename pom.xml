@@ -22,6 +22,11 @@
 			<version>6.8</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20170516</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>
@@ -30,8 +35,8 @@
 				<artifactId>license-maven-plugin</artifactId>
 				<version>1.14</version>
 				<configuration>
-					<verbose>false</verbose>					
-					<licenseName>gpl_v3</licenseName>					
+					<verbose>false</verbose>
+					<licenseName>gpl_v3</licenseName>
 				</configuration>
 				<executions>
 					<execution>
