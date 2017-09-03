@@ -25,8 +25,11 @@ package org.transitime;
 import org.testng.annotations.Test;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -54,28 +57,44 @@ public class MapsTest {
 	 */
 	@Test
 	public void routeOnMap() throws InterruptedException {
-		
-		
-		
+						
 		driver.get(baseUrl);
 		String title = driver.getTitle();
 		Assert.assertTrue(title.contains("Agencies"));
 		
 		driver.findElement(By.partialLinkText("Maps")).click();
+		driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
+		
 		driver.findElement(By.partialLinkText("Map for Selected Route")).click();
+		driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
+													
+		driver.findElement(By.id("select2-routes-container")).click();
+		
+		WebElement searchElement = driver.findElement(By.className("select2-search__field"));
 						
-		WebElement selectElement = driver.findElement(By.id("routes"));
-		
-		Select select = new Select(selectElement);
-		
-		select.toString();
-		
-		List<WebElement> allOptions = select.getOptions();
-		
-		Assert.assertTrue(allOptions.size()>1);
-		
+		searchElement.sendKeys("2 - Nebraska Avenue" + Keys.ENTER);
+				
+		driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
+					
 	}
-
+	@Test
+	public void scheduleAdherence() 
+	{
+		driver.get(baseUrl);
+		String title = driver.getTitle();
+		Assert.assertTrue(title.contains("Agencies"));
+		
+		driver.findElement(By.partialLinkText("Maps")).click();
+		driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
+		
+		driver.findElement(By.partialLinkText("Schedule Adherence Map")).click();
+		driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
+		
+		WebElement marker = driver.findElement(By.className("leaflet-marker-pane"));
+		
+		Assert.assertTrue(marker != null);
+				
+	}
 	@BeforeTest
 	public void beforeTest() {
 		driver = new ChromeDriver();
