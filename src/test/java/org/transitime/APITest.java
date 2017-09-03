@@ -48,16 +48,42 @@ public class APITest {
 	private WebDriver driver;
 	private String baseUrl="http://127.0.0.1:8080/web";
 	
-	
 	/**
-	 * This goes to the API screen and selects "Routes" and then reads the json result to check at least one route.
+	 * This goes to the API screen and selects "Agencies" and then reads the json result to check there is at least one agency.
+	 * @throws InterruptedException
+	 */	
+	@Test
+	public void getAgencies() {
+		driver.get(baseUrl);
+		
+		String title = driver.getTitle();
+		
+		Assert.assertTrue(title.contains("Agencies"));
+		driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
+		
+		driver.findElement(By.partialLinkText("API")).click();
+		driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
+		
+		driver.findElement(By.partialLinkText("Agencies")).click();
+		driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
+				
+		driver.findElement(By.id("submit")).click();;
+		driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
+		
+		String jsonResult=driver.findElement(By.tagName("body")).getText();
+								
+		JSONObject objResult = new JSONObject(jsonResult);
+
+		JSONArray agencies = objResult.getJSONArray("agency");
+		
+		Assert.assertTrue(agencies.length()>0);
+	}
+	/**
+	 * This goes to the API screen and selects "Routes" and then reads the json result to check there is at least one route.
 	 * @throws InterruptedException
 	 */
 	@Test
-	public void GetRouteInfo() throws InterruptedException {
-		
-		
-		
+	public void getRouteInfo()  {						
 		driver.get(baseUrl);
 		
 		String title = driver.getTitle();
@@ -82,7 +108,37 @@ public class APITest {
 		
 		Assert.assertTrue(routes.length()>0);
 	}
+	/**
+	 * This goes to the API screen and selects "Vehicles" and then reads the json result to check there is at least one vehicle.
+	 * @throws InterruptedException
+	 */	
+	@Test
+	public void getVehicleDetails()  {
+		driver.get(baseUrl);
+		
+		String title = driver.getTitle();
+		
+		Assert.assertTrue(title.contains("Agencies"));
+		driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
+		
+		driver.findElement(By.partialLinkText("API")).click();
+		driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
+		
+		driver.findElement(By.partialLinkText("Vehicles")).click();
+		driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
+				
+		driver.findElement(By.id("submit")).click();;
+		driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
+		
+		String jsonResult=driver.findElement(By.tagName("body")).getText();
+								
+		JSONObject objResult = new JSONObject(jsonResult);
 
+		JSONArray vehicles = objResult.getJSONArray("vehicles");
+		
+		Assert.assertTrue(vehicles.length()>0);
+	}
+	
 	@BeforeTest
 	public void beforeTest() {
 		driver = new ChromeDriver();
