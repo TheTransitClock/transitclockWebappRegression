@@ -26,10 +26,12 @@ import org.testng.annotations.Test;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
@@ -62,8 +64,6 @@ public class ReportsTest {
 		
 		driver.findElement(By.partialLinkText("Last GPS Report by Vehicle")).click();										
 		
-		driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
-		
 		//TODO make this be a wait for table to load
 		Thread.sleep(5000);
 		
@@ -71,11 +71,87 @@ public class ReportsTest {
 		
 		Assert.assertTrue(driver.getPageSource().contains(date));
 	}
-
+	@Test
+	public void predictionAccuracyScatterPlot()
+	{
+		driver.get(baseUrl);
+		
+		String title = driver.getTitle();
+		
+		Assert.assertTrue(title.contains("Agencies"));
+		
+		driver.findElement(By.partialLinkText("Reports")).click();
+						
+		driver.findElement(By.partialLinkText("Prediction Accuracy Scatter Plot")).click();
+						
+		WebElement button = driver.findElement(By.id("submit"));
+		
+		button.submit();				
+		
+		Assert.assertTrue(driver.getPageSource().contains("Prediction Time"));
+	}
+	@Test
+	public void predictionAccuracyRangeChart()
+	{
+		driver.get(baseUrl);
+		
+		String title = driver.getTitle();
+		
+		Assert.assertTrue(title.contains("Agencies"));
+		
+		driver.findElement(By.partialLinkText("Reports")).click();
+						
+		driver.findElement(By.partialLinkText("Prediction Accuracy Range Chart")).click();
+						
+		WebElement button = driver.findElement(By.id("submit"));
+		
+		button.submit();				
+		
+		Assert.assertTrue(driver.getPageSource().contains("Prediction Length"));
+	}
+	@Test
+	public void scheduleAdherenceEarlyLate()
+	{
+		driver.get(baseUrl);
+		
+		String title = driver.getTitle();
+		
+		Assert.assertTrue(title.contains("Agencies"));
+		
+		driver.findElement(By.partialLinkText("Reports")).click();
+						
+		driver.findElement(By.partialLinkText("Schedule Adherence by how Early/Late")).click();
+						
+		WebElement button = driver.findElement(By.id("submit"));
+		
+		button.submit();				
+		
+		Assert.assertTrue(driver.getPageSource().contains("Minutes vehicle late (negative) or early (positive)"));
+	}
+	@Test
+	public void scheduleAdherenceByRoute()
+	{
+		driver.get(baseUrl);
+		
+		String title = driver.getTitle();
+		
+		Assert.assertTrue(title.contains("Agencies"));
+		
+		driver.findElement(By.partialLinkText("Reports")).click();
+						
+		driver.findElement(By.partialLinkText("Schedule Adherence by Route")).click();
+						
+		WebElement button = driver.findElement(By.id("submit"));
+		
+		button.submit();				
+		
+		Assert.assertTrue(driver.getPageSource().contains("On Time"));
+	}
+	
 	@BeforeTest
 	public void beforeTest() {
 		driver = new ChromeDriver();
-		
+		driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
 		if(System.getProperty("baseurl")!=null&&System.getProperty("baseurl").length()>0)
 		{
 			this.baseUrl=System.getProperty("baseurl");

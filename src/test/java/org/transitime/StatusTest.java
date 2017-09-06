@@ -49,20 +49,14 @@ public class StatusTest {
 	public void databaseConnectivity() {
 		driver.get(baseUrl);
 
-		driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
-
 		String title = driver.getTitle();
 
 		Assert.assertTrue(title.contains("Agencies"));
 
 		driver.findElement(By.partialLinkText("Status")).click();
-
-		driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
-
+		
 		driver.findElement(By.partialLinkText("Server Status")).click();
-
-		driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
-
+		
 		Assert.assertTrue(driver.getPageSource().contains("Successfully read and wrote to database."));
 
 	}
@@ -70,7 +64,7 @@ public class StatusTest {
 	@BeforeTest
 	public void beforeTest() {
 		driver = new ChromeDriver();
-
+		driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
 		if (System.getProperty("baseurl") != null && System.getProperty("baseurl").length() > 0) {
 			this.baseUrl = System.getProperty("baseurl");
 		}

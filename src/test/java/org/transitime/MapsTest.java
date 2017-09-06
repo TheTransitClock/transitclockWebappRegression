@@ -63,20 +63,22 @@ public class MapsTest {
 		Assert.assertTrue(title.contains("Agencies"));
 		
 		driver.findElement(By.partialLinkText("Maps")).click();
-		driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
+		
 		
 		driver.findElement(By.partialLinkText("Map for Selected Route")).click();
-		driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
+		
 													
 		driver.findElement(By.id("select2-routes-container")).click();
 		
 		WebElement searchElement = driver.findElement(By.className("select2-search__field"));
-						
-		searchElement.sendKeys("2 - Nebraska Avenue" + Keys.ENTER);
-				
-		driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
+			
+		// TODO need to get this to read route from API to enter here.
+		searchElement.sendKeys("2 - Nebraska Avenue" + Keys.ENTER);						
 					
 	}
+	/**
+	 * This goes to the schedule adherence map and finds a circle.
+	 */
 	@Test
 	public void scheduleAdherence() 
 	{
@@ -85,11 +87,9 @@ public class MapsTest {
 		Assert.assertTrue(title.contains("Agencies"));
 		
 		driver.findElement(By.partialLinkText("Maps")).click();
-		driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
-		
+				
 		driver.findElement(By.partialLinkText("Schedule Adherence Map")).click();
-		driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
-		
+				
 		WebElement marker = driver.findElement(By.className("leaflet-marker-pane"));
 		
 		Assert.assertTrue(marker != null);
@@ -98,7 +98,7 @@ public class MapsTest {
 	@BeforeTest
 	public void beforeTest() {
 		driver = new ChromeDriver();
-		
+		driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);		
 		if(System.getProperty("baseurl")!=null&&System.getProperty("baseurl").length()>0)
 		{
 			this.baseUrl=System.getProperty("baseurl");

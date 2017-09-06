@@ -59,17 +59,13 @@ public class APITest {
 		String title = driver.getTitle();
 		
 		Assert.assertTrue(title.contains("Agencies"));
-		driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
-		
+			
 		driver.findElement(By.partialLinkText("API")).click();
-		driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
 		
 		driver.findElement(By.partialLinkText("Agencies")).click();
-		driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
 				
 		driver.findElement(By.id("submit")).click();;
-		driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
-		
+				
 		String jsonResult=driver.findElement(By.tagName("body")).getText();
 								
 		JSONObject objResult = new JSONObject(jsonResult);
@@ -89,16 +85,12 @@ public class APITest {
 		String title = driver.getTitle();
 		
 		Assert.assertTrue(title.contains("Agencies"));
-		driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
-		
-		driver.findElement(By.partialLinkText("API")).click();
-		driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
-		
-		driver.findElement(By.partialLinkText("Routes")).click();
-		driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
 				
-		driver.findElement(By.id("submit")).click();;
-		driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
+		driver.findElement(By.partialLinkText("API")).click();
+				
+		driver.findElement(By.partialLinkText("Routes")).click();
+						
+		driver.findElement(By.id("submit")).click();;		
 		
 		String jsonResult=driver.findElement(By.tagName("body")).getText();
 								
@@ -119,16 +111,12 @@ public class APITest {
 		String title = driver.getTitle();
 		
 		Assert.assertTrue(title.contains("Agencies"));
-		driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
-		
-		driver.findElement(By.partialLinkText("API")).click();
-		driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
-		
-		driver.findElement(By.partialLinkText("Vehicles")).click();
-		driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
 				
-		driver.findElement(By.id("submit")).click();;
-		driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
+		driver.findElement(By.partialLinkText("API")).click();
+				
+		driver.findElement(By.partialLinkText("Vehicles")).click();
+						
+		driver.findElement(By.id("submit")).click();;		
 		
 		String jsonResult=driver.findElement(By.tagName("body")).getText();
 								
@@ -142,7 +130,7 @@ public class APITest {
 	@BeforeTest
 	public void beforeTest() {
 		driver = new ChromeDriver();
-		
+		driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
 		if(System.getProperty("baseurl")!=null&&System.getProperty("baseurl").length()>0)
 		{
 			this.baseUrl=System.getProperty("baseurl");
