@@ -1,6 +1,6 @@
 This is a project to run a set of UI regression tests against the transiTime web interface.
 
-It requires Selenium and the chrome driver installed on the local machine to run.
+It [ChromeDriver](https://sites.google.com/a/chromium.org/chromedriver/home) installed on the local machine to run.
 
 To run the tests  
 
