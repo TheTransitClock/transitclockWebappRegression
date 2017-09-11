@@ -77,12 +77,16 @@ public class MapsTest {
 
 		// TODO need to get this to read route from API to enter here.
 		searchElement.sendKeys("471");
-		// Create object of Robot class
-		Robot object=new Robot();
-		// Press Enter
-		object.keyPress(KeyEvent.VK_ENTER);
-		// Release Enter
-		object.keyRelease(KeyEvent.VK_ENTER);
+		try {
+			// Create object of Robot class
+			Robot object=new Robot();
+			// Press Enter
+			object.keyPress(KeyEvent.VK_ENTER);
+			// Release Enter
+			object.keyRelease(KeyEvent.VK_ENTER);
+		} catch ( AWTException exception ){
+			System.out.println("AWT Exception: " + exception);
+		}
 
 		//wait after enter key press
 		Thread.sleep(2000);
