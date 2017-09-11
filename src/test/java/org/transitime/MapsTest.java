@@ -74,7 +74,7 @@ public class MapsTest {
 		driver.findElement(By.id("select2-routes-container")).click();
 
 		//length of page source before ajax call
-		int oldLength = driver.getPageSource().length;
+		int oldLength = driver.getPageSource().length();
 
 		WebElement searchElement = driver.findElement(By.className("select2-search__field"));
 
@@ -94,9 +94,9 @@ public class MapsTest {
 		//wait after enter key press
 		Thread.sleep(5000);
 		//check if something was added to map
-		Assert.assertTrue(driver.getPageSource().length != oldLength);
+		Assert.assertTrue(driver.getPageSource().length() != oldLength);
 		//check if what we added contains more text ( like leaflet-clickable html classes )
-		Assert.assertTrue(driver.getPageSource().length > oldLength);
+		Assert.assertTrue(driver.getPageSource().length() > oldLength);
 	}
 	/**
 	 * This goes to the schedule adherence map and finds a circle.
