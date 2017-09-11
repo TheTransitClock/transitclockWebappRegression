@@ -251,9 +251,9 @@ public class APITest {
 		//select second option to be human readable format
 		driver.findElements(By.id("radioButtonsDiv")).get(1).click();
 
-		driver.findElement(By.id("submit")).click();;
+		driver.findElement(By.id("submit")).click();
 
-		String text = driver.findElement(By.tagName("body")).getText()
+		String text = driver.findElement(By.tagName("body")).getText();
 
 		Assert.assertTrue(text.contains("header"));
 	}
