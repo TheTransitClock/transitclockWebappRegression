@@ -190,8 +190,13 @@ public class ReportsTest {
 		File f = new File(filePath);
 		if(f.exists() && !f.isDirectory()) {
     	//read file first line and check whether contains pred_length
+			try {
 			BufferedReader csv = new BufferedReader(new FileReader(filePath));
 			String text = csv.readLine();
+			}
+			catch ( Exception e ){
+				Assert.assertTrue(1==2);//false
+			}
 			Assert.assertTrue(text.contains("pred_length_secs"));
 		}
 	}
