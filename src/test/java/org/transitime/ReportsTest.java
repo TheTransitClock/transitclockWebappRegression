@@ -193,11 +193,11 @@ public class ReportsTest {
 			try {
 			BufferedReader csv = new BufferedReader(new FileReader(filePath));
 			String text = csv.readLine();
+			Assert.assertTrue(text.contains("pred_length_secs"));
 			}
 			catch ( Exception e ){
 				Assert.assertTrue(1==2);//false
 			}
-			Assert.assertTrue(text.contains("pred_length_secs"));
 		}
 	}
 
