@@ -253,7 +253,7 @@ public class APITest {
 
 		driver.findElement(By.id("submit")).click();;
 
-		String text =driver.getText();
+		String text = driver.findElement(By.tagName("body")).getText()
 
 		Assert.assertTrue(text.contains("header"));
 	}
