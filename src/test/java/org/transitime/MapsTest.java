@@ -40,6 +40,7 @@ import org.testng.annotations.AfterTest;
 
 import java.awt.AWTException;
 import java.awt.Robot;
+import java.awt.event.KeyEvent;
 /**
  * @author Sean Óg Crudden
  * First go at using selenium to test transiTime web interface.
