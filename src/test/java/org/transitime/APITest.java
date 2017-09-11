@@ -280,7 +280,7 @@ public class APITest {
 
 		String text = driver.findElement(By.tagName("body")).getText();
 
-		Assert.assertTrue(text.contains("ent	ity"));
+		Assert.assertTrue(text.contains("entity"));
 	}
 	/**
 	 * This goes to the API screen and selects "SIRI Vehicle Monitoring" and then reads the json result to check there is ServiceDelivery.
