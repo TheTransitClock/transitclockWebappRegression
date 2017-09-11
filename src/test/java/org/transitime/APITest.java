@@ -193,7 +193,7 @@ public class APITest {
 
 		driver.findElement(By.partialLinkText("API")).click();
 
-		driver.findElement(By.partialLinkText("Block details")).click();
+		driver.findElement(By.partialLinkText("Block Details")).click();
 
 		driver.findElement(By.id("submit")).click();;
 
@@ -249,7 +249,7 @@ public class APITest {
 		driver.findElement(By.partialLinkText("GTFS-realtime Trip Updates")).click();
 
 		//select second option to be human readable format
-		driver.findElements(By.id("radioButtonsDiv")).get(1).click();
+		driver.findElements(By.name("format")).get(1).click();
 
 		driver.findElement(By.id("submit")).click();
 
