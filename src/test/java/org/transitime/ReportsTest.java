@@ -28,14 +28,21 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.HashMap;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.AfterTest;
+
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
 
 /**
  * @author Sean Óg Crudden
@@ -148,7 +155,7 @@ public class ReportsTest {
 		Assert.assertTrue(driver.getPageSource().contains("On Time"));
 	}
 
-/*	@Test
+	@Test
 	public void predictionAccuracyCSVDownload()
 	{
 		driver.get(baseUrl);
@@ -165,12 +172,32 @@ public class ReportsTest {
 
 		button.submit();
 
-		Assert.assertTrue(driver.getPageSource().contains("pred_length_secs"));
+		try {
+			// Create object of Robot class
+			Robot object=new Robot();
+			// Press Enter
+			object.keyPress(KeyEvent.VK_ENTER);
+			// Release Enter
+			object.keyRelease(KeyEvent.VK_ENTER);
+		} catch ( AWTException exception ){
+			System.out.println("AWT Exception: " + exception);
+		}
+		//Assert.assertTrue(driver.getPageSource().contains("pred_length_secs"));
 	}
-*/
+
 	@BeforeTest
 	public void beforeTest() {
-		driver = new ChromeDriver();
+		String downloadFilepath = "/home/onebusaway";
+		HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
+	chromePrefs.put("profile.default_content_settings.popups", 0);
+	chromePrefs.put("download.default_directory", downloadFilepath);
+	ChromeOptions options = new ChromeOptions();
+	options.setExperimentalOption("prefs", chromePrefs);
+	DesiredCapabilities cap = DesiredCapabilities.chrome();
+	cap.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+	cap.setCapability(ChromeOptions.CAPABILITY, options);
+
+		driver = new ChromeDriver(cap);
 		driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
 		if(System.getProperty("baseurl")!=null&&System.getProperty("baseurl").length()>0)
 		{
