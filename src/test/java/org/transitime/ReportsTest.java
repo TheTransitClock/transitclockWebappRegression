@@ -45,6 +45,9 @@ import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
 
+import java.io.File;
+import java.io.BufferedReader;
+import java.io.FileReader;
 /**
  * @author Sean Óg Crudden
  * Test the reports.
@@ -53,7 +56,7 @@ import java.awt.event.KeyEvent;
 public class ReportsTest {
 	private WebDriver driver;
 	private String baseUrl="http://127.0.0.1:8080/web";
-
+	private String downloadFilepath;
 
 	/**
 	 * This looks at the last avl report and confirms vehicle report for today for at least one vehicle.
@@ -183,12 +186,28 @@ public class ReportsTest {
 		} catch ( AWTException exception ){
 			System.out.println("AWT Exception: " + exception);
 		}
-		//Assert.assertTrue(driver.getPageSource().contains("pred_length_secs"));
+		String filePath = downloadFilepath+"/Downloads/PredAccuracy.csv";
+		File f = new File(filePath);
+		if(f.exists() && !f.isDirectory()) {
+    	//read file first line and check whether contains pred_length
+			BufferedReader csv = new BufferedReader(new FileReader(filePath));
+			String text = csv.readLine();
+			Assert.assertTrue(text.contains("pred_length_secs"));
+		}
 	}
 
 	@BeforeTest
 	public void beforeTest() {
-		String downloadFilepath = "/home/onebusaway";
+		try {
+			File f = new File(downloadFilepath+"/Downloads/PredAccuracy.csv");
+			if(f.exists() && !f.isDirectory()) {
+	    	// remove file if exists
+				f.delete();
+			}
+		}
+		catch ( Exception e ){
+			System.out.println(e);
+		}
 		HashMap<String, Object> chromePrefs = new HashMap<String, Object>();
 	chromePrefs.put("profile.default_content_settings.popups", 0);
 	chromePrefs.put("download.default_directory", downloadFilepath);
