@@ -258,6 +258,113 @@ public class APITest {
 		Assert.assertTrue(text.contains("header"));
 	}
 	/**
+	 * This goes to the API screen and selects "GTFS-Realtime vehicle positions" and then reads the json result to check there is at least one vehicle position.
+	 * @throws InterruptedException
+	 */
+	@Test
+	public void getGTFSRealtimeVehiclePositions()  {
+		driver.get(baseUrl);
+
+		String title = driver.getTitle();
+
+		Assert.assertTrue(title.contains("Agencies"));
+
+		driver.findElement(By.partialLinkText("API")).click();
+
+		driver.findElement(By.partialLinkText("GTFS-realtime Vehicle Positions")).click();
+
+		//select second option to be human readable format
+		driver.findElements(By.name("format")).get(1).click();
+
+		driver.findElement(By.id("submit")).click();
+
+		String text = driver.findElement(By.tagName("body")).getText();
+
+		Assert.assertTrue(text.contains("ent	ity"));
+	}
+	/**
+	 * This goes to the API screen and selects "SIRI Vehicle Monitoring" and then reads the json result to check there is ServiceDelivery.
+	 * @throws InterruptedException
+	 */
+	@Test
+	public void getSIRIVehicleMonitoring()  {
+		driver.get(baseUrl);
+
+		String title = driver.getTitle();
+
+		Assert.assertTrue(title.contains("Agencies"));
+
+		driver.findElement(By.partialLinkText("API")).click();
+
+		driver.findElement(By.partialLinkText("SIRI Vehicle Monitoring")).click();
+
+		driver.findElement(By.id("submit")).click();;
+
+		String jsonResult=driver.findElement(By.tagName("body")).getText();
+
+		JSONObject objResult = new JSONObject(jsonResult);
+
+		JSONObject objServiceDelivery = objResult.getJSONObject("ServiceDelivery");
+
+		String responseTimestamp = objServiceDelivery.getString("ResponseTimestamp");
+
+		Assert.assertTrue(responseTimestamp != null);
+	}
+
+	/**
+	 * This goes to the API screen and selects "Schedule for Route, stops horizontal" and then reads the json result to check there is at least one schedule.
+	 * @throws InterruptedException
+	 */
+	@Test
+	public void getScheduleForRouteHorizontal()  {
+		driver.get(baseUrl);
+
+		String title = driver.getTitle();
+
+		Assert.assertTrue(title.contains("Agencies"));
+
+		driver.findElement(By.partialLinkText("API")).click();
+
+		driver.findElement(By.partialLinkText("Schedule for Route, stops horizontal")).click();
+
+		driver.findElement(By.id("submit")).click();;
+
+		String jsonResult=driver.findElement(By.tagName("body")).getText();
+
+		JSONObject objResult = new JSONObject(jsonResult);
+
+		JSONArray vehicles = objResult.getJSONArray("schedule");
+
+		Assert.assertTrue(vehicles.length()>0);
+	}
+
+	/**
+	 * This goes to the API screen and selects "Schedule for Route, stops vertical" and then reads the json result to check there is at least one schedule.
+	 * @throws InterruptedException
+	 */
+	@Test
+	public void getScheduleForRouteVertical()  {
+		driver.get(baseUrl);
+
+		String title = driver.getTitle();
+
+		Assert.assertTrue(title.contains("Agencies"));
+
+		driver.findElement(By.partialLinkText("API")).click();
+
+		driver.findElement(By.partialLinkText("Schedule for Route, stops vertical")).click();
+
+		driver.findElement(By.id("submit")).click();;
+
+		String jsonResult=driver.findElement(By.tagName("body")).getText();
+
+		JSONObject objResult = new JSONObject(jsonResult);
+
+		JSONArray schedules = objResult.getJSONArray("schedule");
+
+		Assert.assertTrue(schedules.length()>0);
+	}
+	/**
 	 * This goes to the API screen and selects "Vehicles" and then reads the json result to check there is at least one vehicle.
 	 * @throws InterruptedException
 	 */
