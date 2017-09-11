@@ -100,6 +100,163 @@ public class APITest {
 
 		Assert.assertTrue(routes.length()>0);
 	}
+
+	/**
+	 * This goes to the API screen and selects "Vehicles" and then reads the json result to check there is at least one vehicle.
+	 * @throws InterruptedException
+	 */
+	@Test
+	public void getVehicleInfo()  {
+		driver.get(baseUrl);
+
+		String title = driver.getTitle();
+
+		Assert.assertTrue(title.contains("Agencies"));
+
+		driver.findElement(By.partialLinkText("API")).click();
+
+		driver.findElement(By.partialLinkText("Vehicles")).click();
+
+		driver.findElement(By.id("submit")).click();;
+
+		String jsonResult=driver.findElement(By.tagName("body")).getText();
+
+		JSONObject objResult = new JSONObject(jsonResult);
+
+		JSONArray vehicles = objResult.getJSONArray("vehicles");
+
+		Assert.assertTrue(vehicles.length()>0);
+	}
+	/**
+	 * This goes to the API screen and selects "Vehicle Configurations" and then reads the json result to check there is at least one vehicles configuration.
+	 * @throws InterruptedException
+	 */
+	@Test
+	public void getVehicleConfigurationInfo()  {
+		driver.get(baseUrl);
+
+		String title = driver.getTitle();
+
+		Assert.assertTrue(title.contains("Agencies"));
+
+		driver.findElement(By.partialLinkText("API")).click();
+
+		driver.findElement(By.partialLinkText("Vehicle Configurations")).click();
+
+		driver.findElement(By.id("submit")).click();;
+
+		String jsonResult=driver.findElement(By.tagName("body")).getText();
+
+		JSONObject objResult = new JSONObject(jsonResult);
+
+		JSONArray vehicleConfigurations = objResult.getJSONArray("vehicleConfig");
+
+		Assert.assertTrue(vehicleConfigurations.length()>0);
+	}
+	/**
+	 * This goes to the API screen and selects "Blocks" and then reads the json result to check there is at least one block configuration.
+	 * @throws InterruptedException
+	 */
+	@Test
+	public void getBlockInfo()  {
+		driver.get(baseUrl);
+
+		String title = driver.getTitle();
+
+		Assert.assertTrue(title.contains("Agencies"));
+
+		driver.findElement(By.partialLinkText("API")).click();
+
+		driver.findElement(By.partialLinkText("Block")).click();
+
+		driver.findElement(By.id("submit")).click();;
+
+		String jsonResult=driver.findElement(By.tagName("body")).getText();
+
+		JSONObject objResult = new JSONObject(jsonResult);
+
+		JSONArray blocks = objResult.getJSONArray("block");
+
+		Assert.assertTrue(blocks.length()>0);
+	}
+	/**
+	 * This goes to the API screen and selects "Block details" and then reads the json result to check there is at least one block.
+	 * @throws InterruptedException
+	 */
+	@Test
+	public void getBlockDetails()  {
+		driver.get(baseUrl);
+
+		String title = driver.getTitle();
+
+		Assert.assertTrue(title.contains("Agencies"));
+
+		driver.findElement(By.partialLinkText("API")).click();
+
+		driver.findElement(By.partialLinkText("Block details")).click();
+
+		driver.findElement(By.id("submit")).click();;
+
+		String jsonResult=driver.findElement(By.tagName("body")).getText();
+
+		JSONObject objResult = new JSONObject(jsonResult);
+
+		JSONArray blocks = objResult.getJSONArray("block");
+
+		Assert.assertTrue(blocks.length()>0);
+	}
+
+	/**
+	 * This goes to the API screen and selects "Service ID" and then reads the json result to check there is at least one service id configuration.
+	 * @throws InterruptedException
+	 */
+	@Test
+	public void getServiceInfo()  {
+		driver.get(baseUrl);
+
+		String title = driver.getTitle();
+
+		Assert.assertTrue(title.contains("Agencies"));
+
+		driver.findElement(By.partialLinkText("API")).click();
+
+		driver.findElement(By.partialLinkText("Service IDs")).click();
+
+		driver.findElement(By.id("submit")).click();;
+
+		String jsonResult=driver.findElement(By.tagName("body")).getText();
+
+		JSONObject objResult = new JSONObject(jsonResult);
+
+		JSONArray ids = objResult.getJSONArray("ids");
+
+		Assert.assertTrue(ids.length()>0);
+	}
+	/**
+	 * This goes to the API screen and selects "GTFS-Realtime trip updates" and then reads the json result to check there is at least one update.
+	 * @throws InterruptedException
+	 */
+	@Test
+	public void getGTFSRealtimeUpdateDetails()  {
+		driver.get(baseUrl);
+
+		String title = driver.getTitle();
+
+		Assert.assertTrue(title.contains("Agencies"));
+
+		driver.findElement(By.partialLinkText("API")).click();
+
+		driver.findElement(By.partialLinkText("GTFS-realtime Trip Updates")).click();
+
+		//select second option to be human readable format
+		driver.findElements(By.id("radioButtonsDiv")).get(1).click();
+
+		driver.findElement(By.id("submit")).click();;
+
+		String text =driver.getText();
+
+		Assert.assertTrue(text.contains("header"));
+	}
 	/**
 	 * This goes to the API screen and selects "Vehicles" and then reads the json result to check there is at least one vehicle.
 	 * @throws InterruptedException
