@@ -52,7 +52,7 @@ import java.awt.event.KeyEvent;
 public class MapsTest {
 	private WebDriver driver;
 	private String baseUrl="http://127.0.0.1:8080/web";
-
+	private String keysToSend = "471";
 
 	/**
 	 * This goes to the maps page and looks at the "Map for Selected Route" page and checks if there is at least one route option avialable.
@@ -79,7 +79,7 @@ public class MapsTest {
 		WebElement searchElement = driver.findElement(By.className("select2-search__field"));
 
 		// TODO need to get this to read route from API to enter here.
-		searchElement.sendKeys("471");
+		searchElement.sendKeys(keysToSend);
 		try {
 			// Create object of Robot class
 			Robot object=new Robot();
