@@ -148,7 +148,7 @@ public class ReportsTest {
 		Assert.assertTrue(driver.getPageSource().contains("On Time"));
 	}
 
-	@Test
+/*	@Test
 	public void predictionAccuracyCSVDownload()
 	{
 		driver.get(baseUrl);
@@ -167,7 +167,7 @@ public class ReportsTest {
 
 		Assert.assertTrue(driver.getPageSource().contains("pred_length_secs"));
 	}
-
+*/
 	@BeforeTest
 	public void beforeTest() {
 		driver = new ChromeDriver();
